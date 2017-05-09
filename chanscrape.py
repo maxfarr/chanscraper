@@ -43,7 +43,7 @@ def scrape( boardname ):
     #gather current thread IDs
     ids = b.get_all_thread_ids()
     print('gathering posts from /' + boardname + '/')
-    print('-------------------------------')
+    print('--------------------------------')
 
     for x in range(1, len(ids)-1):
         #if the thread has not 404'd:
