@@ -13,7 +13,8 @@ import xml.etree.ElementTree
 from datetime import datetime
 
 #BOARDS TO SCRAPE
-boardnames = {'mu', 'vg', 'k', 'pol', 'b', 'lgbt'}
+#boardnames = {'mu', 'vg', 'k', 'pol', 'b', 'lgbt'}
+boardnames = {'pol'}
 
 def scrape( boardname ):
 
@@ -71,12 +72,12 @@ def scrape( boardname ):
                     #create xml file
                     if not os.path.exists(boardname + "_xml"):
                         os.mkdir(boardname + "_xml")
-                    directory = boardname + "_xml\\4chan_" + str(post.post_id) + ".xml"
+                    directory = boardname + "_xml\\4chan_" + str(ids[x]) + "_" + str(post.post_id) + ".xml"
                     xmlfile = open(os.path.join(here, directory), 'w+')
 
                     #build xml tree/fill in data
                     postname = "" if not post.name else post.name.encode('ascii', 'ignore').decode('ascii').replace('&', '&amp;').replace('>', '&gt;').replace('<', '&lt;')
-                    posturl = "" if not thread.semantic_url else thread.semantic_url.encode('ascii', 'ignore').decode('ascii').replace('&', '&amp;').replace('>', '&gt;').replace('<', '&lt;')
+                    posturl = "" if not thread.semantic_url else thread.semantic_url.encode('ascii', 'ignore').decode('ascii').replace('&', '&amp;').replace('>', '&gt;').replace('<', '&lt;') + "#p" + str(post.post_id)
                     postcomment = "" if not post.text_comment else post.text_comment.encode('ascii', 'ignore').decode('ascii').replace('&', '&amp;').replace('>', '&gt;').replace('<', '&lt;')
                     xmltext = """\
 <?xml version="1.0" encoding="UTF-8"?>
